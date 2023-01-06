@@ -7,7 +7,6 @@ import com.cherlie.game.Global.GlobalVariable;
 
 import discord4j.core.object.entity.Guild;
 import discord4j.core.object.entity.channel.MessageChannel;
-import reactor.core.publisher.Mono;
 
 @ApplicationScoped
 public class GameService {
@@ -17,10 +16,7 @@ public class GameService {
     @Inject
     ServerService serverService;
 
-    public void initialize(Mono<Guild> monoGuild, Mono<MessageChannel> monoChannel) {
-        Guild guild = monoGuild.block();
-        MessageChannel channel = monoChannel.block();
-
+    public void initialize(Guild guild, MessageChannel channel) {
         boolean serverInit = false;
 
         if(GlobalVariable.channelsList.containsKey(guild.getId().asString())) {

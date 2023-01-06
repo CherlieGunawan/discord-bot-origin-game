@@ -26,15 +26,12 @@ public class MessageService {
 
     public void processMessage(Message message) {
         String messageString = message.getContent();
-        Mono<MessageChannel> channel = message.getChannel();
 
-        if(messageString.equalsIgnoreCase("start"))
-            sendMessage("AAA", channel);
-        else if(messageString.equalsIgnoreCase("init") || messageString.equalsIgnoreCase("initialize")) {
-            Mono<Guild> messageGuild = message.getGuild();
-            Mono<MessageChannel> messageChannel = message.getChannel();
+        if(messageString.equalsIgnoreCase("init") || messageString.equalsIgnoreCase("initialize")) {
+            Guild guild = message.getGuild().block();
+            MessageChannel channel = message.getChannel().block();
 
-            gameService.initialize(messageGuild, messageChannel);
+            gameService.initialize(guild, channel);
         }
     }
 
