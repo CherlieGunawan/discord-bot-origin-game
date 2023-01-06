@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.eclipse.microprofile.config.ConfigProvider;
 
 import com.cherlie.game.Global.GlobalVariable;
-import com.cherlie.game.Service.BotService;
+import com.cherlie.game.Service.Discord.BotService;
 
 import io.quarkus.runtime.StartupEvent;
 import io.vertx.core.json.JsonArray;

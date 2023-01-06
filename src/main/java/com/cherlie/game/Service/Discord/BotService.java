@@ -1,4 +1,4 @@
-package com.cherlie.game.Service;
+package com.cherlie.game.Service.Discord;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
