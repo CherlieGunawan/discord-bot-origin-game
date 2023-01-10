@@ -5,7 +5,6 @@ import javax.inject.Inject;
 
 import com.cherlie.game.Global.GlobalVariable;
 import com.cherlie.game.Service.Discord.MessageService;
-import com.cherlie.game.Service.Discord.ServerService;
 
 import discord4j.core.object.entity.Guild;
 import discord4j.core.object.entity.channel.MessageChannel;
