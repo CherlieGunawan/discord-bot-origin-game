@@ -3,12 +3,14 @@ package com.cherlie.game.Service.Game;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import com.cherlie.game.Global.GlobalFunction;
 import com.cherlie.game.Global.GlobalVariable;
 import com.cherlie.game.Service.Discord.MessageService;
 import com.cherlie.game.Service.Entity.PlayerService;
 
 import discord4j.core.object.entity.Guild;
 import discord4j.core.object.entity.channel.MessageChannel;
+import io.quarkus.arc.ArcUndeclaredThrowableException;
 
 @ApplicationScoped
 public class GameService {
@@ -47,11 +49,20 @@ public class GameService {
     }
 
     public void register(String id, String name, MessageChannel channel) {
-        //TODO: Handle when already registered
-        messageService.sendMessage(messageService.formatQuote("Registering player...."), channel);
+        messageService.sendMessage(messageService.formatQuote("Registering player..."), channel);
         
-        playerService.savePlayer(id, name);
+        try {
+            playerService.savePlayer(id, name);
+        }
+        catch(ArcUndeclaredThrowableException ex) {
+            if(GlobalFunction.isOfException(ex, "ConstraintViolationException"))
+                messageService.sendMessage(messageService.formatQuote("You're already registered!"), channel);
+            else
+                messageService.sendMessage(messageService.formatCodeBlock("Sorry! It seems like there's something wrong with the server right now"), channel); //TODO: Save to db log
 
-        messageService.sendMessage(messageService.formatQuote("Successfully registered ".concat(messageService.formatBold(name)).concat(", welcome to the game.")), channel);
+            return;
+        }
+
+        messageService.sendMessage(messageService.formatQuote("Successfully registered ".concat(messageService.formatBold(name)).concat(", welcome to the game")), channel);
     }
 }
