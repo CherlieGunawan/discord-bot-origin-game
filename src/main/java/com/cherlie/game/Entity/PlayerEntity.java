@@ -22,7 +22,7 @@ public class PlayerEntity extends PanacheEntityBase {
     @Column(name = "name")
     public String name;
     @Column(name = "level")
-    public String level;
+    public int level;
 
     @Column(name = "status_points")
     public int statusPoints;

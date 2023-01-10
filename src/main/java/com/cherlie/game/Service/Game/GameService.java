@@ -5,6 +5,7 @@ import javax.inject.Inject;
 
 import com.cherlie.game.Global.GlobalVariable;
 import com.cherlie.game.Service.Discord.MessageService;
+import com.cherlie.game.Service.Entity.PlayerService;
 
 import discord4j.core.object.entity.Guild;
 import discord4j.core.object.entity.channel.MessageChannel;
@@ -16,6 +17,9 @@ public class GameService {
 
     @Inject
     ServerService serverService;
+
+    @Inject
+    PlayerService playerService;
 
     public void initialize(Guild guild, MessageChannel channel) {
         boolean serverInit = false;
@@ -40,5 +44,14 @@ public class GameService {
         // init others
 
         messageService.sendMessage(messageService.formatCodeBlock("Game is ready"), channel);
+    }
+
+    public void register(String id, String name, MessageChannel channel) {
+        //TODO: Handle when already registered
+        messageService.sendMessage(messageService.formatQuote("Registering player...."), channel);
+        
+        playerService.savePlayer(id, name);
+
+        messageService.sendMessage(messageService.formatQuote("Successfully registered ".concat(messageService.formatBold(name)).concat(", welcome to the game.")), channel);
     }
 }

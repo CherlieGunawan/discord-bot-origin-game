@@ -34,6 +34,19 @@ public class MessageService {
 
             gameService.initialize(guild, channel);
         }
+        else if(messageString.startsWith("register ")) {
+            MessageChannel channel = message.getChannel().block();
+
+            String name = messageString.split("register ")[1];
+            if(name.isBlank()) {
+                sendMessage("Name can't be empty\n".concat(formatQuote("Command: 'register <name>'")), channel);
+                return;
+            }
+            
+            String id = message.getAuthorAsMember().block().getId().asString();
+            
+            gameService.register(id, name, channel);
+        }
     }
 
     public String formatCodeBlock(String message) {

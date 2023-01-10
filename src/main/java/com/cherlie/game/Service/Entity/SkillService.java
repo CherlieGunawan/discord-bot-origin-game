@@ -1,8 +1,8 @@
-package com.cherlie.game.Service.Game;
+package com.cherlie.game.Service.Entity;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class PlayerService {
+public class SkillService {
     
 }
