@@ -58,7 +58,7 @@ public class GameService {
             if(GlobalFunction.isOfException(ex, "ConstraintViolationException"))
                 messageService.sendMessage(messageService.formatQuote("You're already registered!"), channel);
             else
-                messageService.sendMessage(messageService.formatCodeBlock("Sorry! It seems like there's something wrong with the server right now"), channel); //TODO: Save to db log
+                messageService.sendMessage(messageService.formatCodeBlock("Sorry, it seems like there's something wrong with the server right now"), channel); //TODO: Save to db log
 
             return;
         }
