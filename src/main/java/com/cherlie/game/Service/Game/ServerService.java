@@ -43,7 +43,7 @@ public class ServerService {
 
             messageService.sendMessage(messageUtil.formatCodeLine("Successfully saved channels"), channel);
 
-            messageService.sendButton("test button man", channel);
+            messageService.sendButton("test button man", "testId", channel);
         }
         else {
             String channelList = ""; // Init String variable for channels which is not found
