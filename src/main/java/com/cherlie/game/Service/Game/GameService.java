@@ -7,6 +7,7 @@ import com.cherlie.game.Global.GlobalFunction;
 import com.cherlie.game.Global.GlobalVariable;
 import com.cherlie.game.Service.Discord.MessageService;
 import com.cherlie.game.Service.Entity.PlayerService;
+import com.cherlie.game.Util.MessageUtil;
 
 import discord4j.core.object.entity.Guild;
 import discord4j.core.object.entity.channel.MessageChannel;
@@ -18,6 +19,9 @@ public class GameService {
     MessageService messageService;
 
     @Inject
+    MessageUtil messageUtil;
+
+    @Inject
     ServerService serverService;
 
     @Inject
@@ -27,17 +31,17 @@ public class GameService {
         boolean serverInit = false;
 
         if(GlobalVariable.channelsList.containsKey(guild.getId().asString())) {
-            messageService.sendMessage(messageService.formatCodeBlock("Skipping server initialization"), channel);
+            messageService.sendMessage(messageUtil.formatCodeBlock("Skipping server initialization"), channel);
             serverInit = true;
         }
         else {
-            messageService.sendMessage(messageService.formatCodeBlock("Initializing server..."), channel);
+            messageService.sendMessage(messageUtil.formatCodeBlock("Initializing server..."), channel);
             serverInit = serverService.initialize(guild, channel);
             
             if(serverInit)
-                messageService.sendMessage(messageService.formatCodeBlock("Server initialized"), channel);
+                messageService.sendMessage(messageUtil.formatCodeBlock("Server initialized"), channel);
             else {
-                messageService.sendMessage(messageService.formatCodeBlock("Failed to initialize server"), channel);
+                messageService.sendMessage(messageUtil.formatCodeBlock("Failed to initialize server"), channel);
     
                 return;
             }
@@ -45,24 +49,24 @@ public class GameService {
         
         // init others
 
-        messageService.sendMessage(messageService.formatCodeBlock("Game is ready"), channel);
+        messageService.sendMessage(messageUtil.formatCodeBlock("Game is ready"), channel);
     }
 
     public void register(String id, String name, MessageChannel channel) {
-        messageService.sendMessage(messageService.formatQuote("Registering player..."), channel);
+        messageService.sendMessage(messageUtil.formatQuote("Registering player..."), channel);
         
         try {
             playerService.savePlayer(id, name);
         }
         catch(ArcUndeclaredThrowableException ex) {
             if(GlobalFunction.isOfException(ex, "ConstraintViolationException"))
-                messageService.sendMessage(messageService.formatQuote("You're already registered!"), channel);
+                messageService.sendMessage(messageUtil.formatQuote("You're already registered!"), channel);
             else
-                messageService.sendMessage(messageService.formatCodeBlock("Sorry, it seems like there's something wrong with the server right now"), channel); //TODO: Save to db log
+                messageService.sendMessage(messageUtil.formatCodeBlock("Sorry, it seems like there's something wrong with the server right now"), channel); //TODO: Save to db log
 
             return;
         }
 
-        messageService.sendMessage(messageService.formatQuote("Successfully registered ".concat(messageService.formatBold(name)).concat(", welcome to the game")), channel);
+        messageService.sendMessage(messageUtil.formatQuote("Successfully registered ".concat(messageUtil.formatBold(name)).concat(", welcome to the game")), channel);
     }
 }
