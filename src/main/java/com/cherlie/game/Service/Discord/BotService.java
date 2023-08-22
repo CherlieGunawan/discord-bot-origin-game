@@ -7,11 +7,13 @@ import org.eclipse.microprofile.config.ConfigProvider;
 
 import com.cherlie.game.Global.GlobalVariable;
 
+import discord4j.common.util.Snowflake;
 import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.interaction.ButtonInteractionEvent;
 import discord4j.core.event.domain.lifecycle.ReadyEvent;
 import discord4j.core.event.domain.message.MessageCreateEvent;
+import discord4j.core.object.entity.Message;
 import reactor.core.publisher.Mono;
 
 @ApplicationScoped
@@ -36,7 +38,7 @@ public class BotService {
             }).then();
 
             Mono<Void> onButtonClick = gateway.on(ButtonInteractionEvent.class, event -> {
-                return buttonService.handleButton(event.getInteraction());
+                return buttonService.handleButton(event);
             }).then();
 
             return saveSelfDiscriminator.and(onDiscordMessage).and(onButtonClick);

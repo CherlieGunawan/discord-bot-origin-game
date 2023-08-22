@@ -4,6 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import com.cherlie.game.Global.GlobalVariable;
+import com.cherlie.game.Service.Discord.ButtonService;
 import com.cherlie.game.Service.Discord.MessageService;
 import com.cherlie.game.Util.MessageUtil;
 
@@ -21,6 +22,9 @@ public class ServerService {
 
     @Inject
     MessageUtil messageUtil;
+
+    @Inject
+    ButtonService buttonService;
 
     public boolean initialize(Guild guild, MessageChannel channel) {
         Flux<GuildChannel> channels = guild.getChannels();
@@ -43,7 +47,9 @@ public class ServerService {
 
             messageService.sendMessage(messageUtil.formatCodeLine("Successfully saved channels"), channel);
 
-            messageService.sendButton("test button man", "testId", channel);
+            //=== TODO: Delete, this is for testing purpose
+            messageService.sendButton("test button man", buttonService.createMainButtons("test"), channel);
+            //===
         }
         else {
             String channelList = ""; // Init String variable for channels which is not found
