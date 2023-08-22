@@ -6,13 +6,15 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import com.cherlie.game.Constant.ConstantVariable;
+import com.cherlie.game.Service.Game.Menu.MenuService;
+
 import discord4j.common.util.Snowflake;
 import discord4j.core.event.domain.interaction.ButtonInteractionEvent;
 import discord4j.core.object.command.Interaction;
 import discord4j.core.object.component.ActionRow;
 import discord4j.core.object.component.Button;
 import discord4j.core.object.component.LayoutComponent;
-import discord4j.core.object.entity.Member;
 import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.channel.MessageChannel;
 import io.vertx.core.json.JsonObject;
@@ -24,7 +26,7 @@ public class ButtonService {
     MessageService messageService;
 
     @Inject
-    ButtonService buttonService;
+    MenuService menuService;
 
     public Mono<Void> handleButton(ButtonInteractionEvent event) {
         Interaction interaction = event.getInteraction();
@@ -48,48 +50,17 @@ public class ButtonService {
         String buttonId = buttonData.getString("buttonId");
 
         if(buttonId.equals("attack")) {
-            List<LayoutComponent> buttons = buttonService.createAttackButtons(interactorId);
+            List<LayoutComponent> buttons = menuService.createButtons(ConstantVariable.BUTTON_TYPE_ATTACK, interactorId);
             messageService.sendButton("Test Attack Buttons", buttons, channel);
         }
         else {
             messageService.sendMessage("Interaction not yet available", channel);
         }
-        
+
         return Mono.empty();
     }
 
-    public List<LayoutComponent> createMainButtons(String playerId) {
-        List<Button> buttons = new ArrayList<>();
-        buttons.add(craftSecondaryButton("attack", playerId, "Attack"));
-        buttons.add(craftSecondaryButton("skill", playerId, "Skill"));
-        buttons.add(craftSecondaryButton("item", playerId, "Item"));
-        buttons.add(craftSecondaryButton("defend", playerId, "Defend"));
-
-        List<ActionRow> rows = createRows(buttons, 2);
-        List<LayoutComponent> layout = new ArrayList<>();
-        for(int i = 0; i < rows.size(); i++) {
-            layout.add(rows.get(i));
-        }
-
-        return layout;
-    }
-
-    public List<LayoutComponent> createAttackButtons(String playerId) {
-        List<Button> buttons = new ArrayList<>();
-        buttons.add(craftSecondaryButton("Target 1", playerId, "monsterId1"));
-        buttons.add(craftSecondaryButton("Target 2", playerId, "monsterId2"));
-        buttons.add(craftSecondaryButton("Target 3", playerId, "monsterId3"));
-
-        List<ActionRow> rows = createRows(buttons, 2);
-        List<LayoutComponent> layout = new ArrayList<>();
-        for(int i = 0; i < rows.size(); i++) {
-            layout.add(rows.get(i));
-        }
-
-        return layout;
-    }
-
-    private List<ActionRow> createRows(List<Button> buttons, int columns) {
+    public List<ActionRow> createRows(List<Button> buttons, int columns) {
         List<ActionRow> rows = new ArrayList<>();
         List<Button> row = new ArrayList<>();
 
@@ -107,13 +78,5 @@ public class ButtonService {
         }
 
         return rows;
-    }
-
-    private Button craftSecondaryButton(String buttonId, String playerId, String label) {
-        JsonObject jsonId = new JsonObject();
-        jsonId.put("buttonId", buttonId);
-        jsonId.put("playerId", playerId);
-
-        return Button.secondary(jsonId.encode(), label);
     }
 }

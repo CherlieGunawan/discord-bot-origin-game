@@ -5,8 +5,10 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import com.cherlie.game.Constant.ConstantVariable;
 import com.cherlie.game.Global.GlobalVariable;
 import com.cherlie.game.Service.Game.GameService;
+import com.cherlie.game.Service.Game.Menu.MenuService;
 
 import discord4j.core.object.component.LayoutComponent;
 import discord4j.core.object.entity.Guild;
@@ -22,6 +24,9 @@ public class MessageService {
 
     @Inject
     ButtonService buttonService;
+
+    @Inject
+    MenuService menuService;
 
     public Mono<Object> handleMessage(Message message) {
         if(message.getAuthor().isPresent() && !message.getAuthor().get().getDiscriminator().equals(GlobalVariable.selfDiscriminator)) {
@@ -50,7 +55,7 @@ public class MessageService {
         }
         // TODO: Delete, for testing only
         else if(messageString.equals("test button")) {
-            sendButton("Test Buttons", buttonService.createMainButtons(author.getId().asString()), channel);
+            sendButton("Test Buttons", menuService.createButtons(ConstantVariable.BUTTON_TYPE_MAIN, author.getId().asString()), channel);
         }
     }
 

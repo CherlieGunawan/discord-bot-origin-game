@@ -3,8 +3,8 @@ package com.cherlie.game.Repository;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 
+import com.cherlie.game.Constant.ConstantVariable;
 import com.cherlie.game.Entity.PlayerEntity;
-import com.cherlie.game.Global.ConstantVariable;
 
 @ApplicationScoped
 public class PlayerRepository {
@@ -18,8 +18,8 @@ public class PlayerRepository {
         PlayerEntity player = new PlayerEntity();
         player.playerId = playerId;
         
-        player.skillsString = ConstantVariable.emptyJson;
-        player.equipmentsString = ConstantVariable.emptyJson;
+        player.skillsString = ConstantVariable.EMPTY_JSON_STRING;
+        player.equipmentsString = ConstantVariable.EMPTY_JSON_STRING;
         
         player.name = name;
         player.level = 1;
