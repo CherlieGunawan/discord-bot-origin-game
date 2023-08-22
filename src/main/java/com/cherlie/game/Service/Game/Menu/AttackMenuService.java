@@ -23,9 +23,9 @@ public class AttackMenuService {
 
     public List<LayoutComponent> createAttackButtons(String playerId) {
         List<Button> buttons = new ArrayList<>();
-        buttons.add(buttonUtil.craftSecondaryButton("Target 1", playerId, "monsterId1"));
-        buttons.add(buttonUtil.craftSecondaryButton("Target 2", playerId, "monsterId2"));
-        buttons.add(buttonUtil.craftSecondaryButton("Target 3", playerId, "monsterId3"));
+        buttons.add(buttonUtil.craftSecondaryButton("monsterId1", playerId, "Target 1"));
+        buttons.add(buttonUtil.craftSecondaryButton("monsterId2", playerId, "Target 2"));
+        buttons.add(buttonUtil.craftSecondaryButton("monsterId3", playerId, "Target 3"));
 
         List<ActionRow> rows = buttonService.createRows(buttons, 2);
         List<LayoutComponent> layout = new ArrayList<>();
