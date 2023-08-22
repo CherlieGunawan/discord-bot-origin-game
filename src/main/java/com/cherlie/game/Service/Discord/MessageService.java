@@ -49,13 +49,13 @@ public class MessageService {
         }
         else if(messageString.startsWith("register ")) {
             String name = messageString.split("register ")[1];
-            String id = message.getAuthorAsMember().block().getId().asString();
+            String id = author.getId().asString();
             
             gameService.register(id, name, channel);
         }
         // TODO: Delete, for testing only
         else if(messageString.equals("test button")) {
-            sendButton("Test Buttons", menuService.createButtons(ConstantVariable.BUTTON_TYPE_MAIN, author.getId().asString()), channel);
+            sendButton("It's your turn, <@" + author.getId().asString() + ">!", menuService.createButtons(ConstantVariable.BUTTON_TYPE_MAIN, author.getId().asString()), channel);
         }
     }
 

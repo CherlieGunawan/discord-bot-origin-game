@@ -51,7 +51,7 @@ public class ButtonService {
 
         if(buttonId.equals("attack")) {
             List<LayoutComponent> buttons = menuService.createButtons(ConstantVariable.BUTTON_TYPE_ATTACK, interactorId);
-            messageService.sendButton("Test Attack Buttons", buttons, channel);
+            messageService.sendButton("Which one do you want to attack, <@" + interactorId + ">?", buttons, channel);
         }
         else {
             messageService.sendMessage("Interaction not yet available", channel);
