@@ -1,15 +1,18 @@
 package com.cherlie.game.Model;
 
-import com.cherlie.game.Entity.SkillEntity;
+import java.util.List;
 
-import io.vertx.core.json.JsonObject;
+import com.cherlie.game.Entity.SkillEntity;
+import com.cherlie.game.Entity.SkillPrerequisiteEntity;
 
 public class SkillModel {
     public SkillEntity skill;
-    public JsonObject damage;
+    public List<SkillConfigModel> skillConfigs;
+    public List<SkillPrerequisiteEntity> prerequisites;
 
-    public SkillModel(SkillEntity skill) {
+    public SkillModel(SkillEntity skill, List<SkillConfigModel> skillConfigs, List<SkillPrerequisiteEntity> prerequisites) {
         this.skill = skill;
-        this.damage = new JsonObject(skill.damage);
+        this.skillConfigs = skillConfigs;
+        this.prerequisites = prerequisites;
     }
 }

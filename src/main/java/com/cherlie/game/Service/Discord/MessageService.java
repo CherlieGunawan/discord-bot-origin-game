@@ -42,6 +42,13 @@ public class MessageService {
             
             gameService.register(id, name, channel);
         }
+        else if(messageString.equals("open status")) {
+            MessageChannel channel = message.getChannel().block();
+
+            String id = message.getAuthorAsMember().block().getId().asString();
+            
+            gameService.fetchPlayerStatus(id, channel);
+        }
     }
 
     public String formatCodeBlock(String message) {

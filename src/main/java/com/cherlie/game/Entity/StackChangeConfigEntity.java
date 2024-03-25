@@ -3,12 +3,16 @@ package com.cherlie.game.Entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
+
+import com.cherlie.game.Entity.CompositeKeys.StackChangeConfigKey;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
 @Table(name = "stack_change_config")
+@IdClass(StackChangeConfigKey.class)
 public class StackChangeConfigEntity extends PanacheEntityBase {
     @Id
     @Column(name = "stack_id")
@@ -28,5 +32,5 @@ public class StackChangeConfigEntity extends PanacheEntityBase {
     public double powerChangeValue;
 
     @Column(name = "max_change_value")
-    public String maxChangeValue;
+    public int maxChangeValue;
 }

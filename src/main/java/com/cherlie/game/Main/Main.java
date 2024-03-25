@@ -23,7 +23,7 @@ public class Main {
 
     void onStart(@Observes StartupEvent ev) {
         // Initialize variables from DB
-        GlobalVariable.skills = skillService.initialize(); //TODO: key = skillId
+        skillService.initialize();
         GlobalVariable.gameChannelNames = new JsonArray(ConfigProvider.getConfig().getValue("game.channel.names", String.class));
         
         botService.start();

@@ -1,5 +1,7 @@
 package com.cherlie.game.Service.Entity;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -14,6 +16,10 @@ public class PlayerService {
 
     @Transactional
     public PlayerModel savePlayer(String playerId, String name) {
-        return new PlayerModel(playerRepository.save(playerId, name));
+        return new PlayerModel(playerRepository.save(playerId, name), List.of());
+    }
+
+    public PlayerModel fetchPlayer(String playerId) {
+        return new PlayerModel(playerRepository.fetchPlayer(playerId), playerRepository.fetchPlayerSkills(playerId));
     }
 }

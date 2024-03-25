@@ -1,37 +1,38 @@
 package com.cherlie.game.Repository;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 
 import com.cherlie.game.Entity.PlayerEntity;
-import com.cherlie.game.Global.ConstantVariable;
+import com.cherlie.game.Entity.PlayerSkillEntity;
 
 @ApplicationScoped
 public class PlayerRepository {
     @Transactional
-    public PlayerEntity fetch(String playerId) {
+    public PlayerEntity fetchPlayer(String playerId) {
         return PlayerEntity.findById(playerId);
+    }
+
+    @Transactional
+    public List<PlayerSkillEntity> fetchPlayerSkills(String playerId) {
+        return PlayerSkillEntity.list("player_id = ?1", playerId);
     }
 
     @Transactional
     public PlayerEntity save(String playerId, String name) {
         PlayerEntity player = new PlayerEntity();
-        player.playerId = playerId;
-        
-        player.skillsString = ConstantVariable.emptyJson;
-        player.equipmentsString = ConstantVariable.emptyJson;
-        
+        player.id = playerId;
         player.name = name;
         player.level = 1;
-        
-        player.statusPoints = 0;
-        player.skillPoints = 0;
-
+        player.statusPoint = 0;
+        player.skillPoint = 0;
         player.strength = 1;
         player.intelligence = 1;
+        player.vitality = 1;
         player.agility = 1;
         player.dexterity = 1;
-        player.vitality = 1;
 
         player.persist();
 
