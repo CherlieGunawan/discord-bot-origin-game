@@ -11,58 +11,33 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 @Table(name = "player")
 public class PlayerEntity extends PanacheEntityBase {
     @Id
-    @Column(name = "player_id")
-    public String playerId;
-
-    @Column(name = "skills")
-    public String skillsString;
-    @Column(name = "equipments")
-    public String equipmentsString;
+    @Column(name = "id")
+    public String id;
 
     @Column(name = "name")
     public String name;
+
     @Column(name = "level")
     public int level;
 
-    @Column(name = "status_points")
-    public int statusPoints;
-    @Column(name = "skill_points")
-    public int skillPoints;
+    @Column(name = "status_point")
+    public int statusPoint;
+
+    @Column(name = "skill_point")
+    public int skillPoint;
 
     @Column(name = "strength")
     public int strength;
+    
     @Column(name = "intelligence")
     public int intelligence;
-    @Column(name = "agility")
-    public int agility;
-    @Column(name = "dexterity")
-    public int dexterity;
+
     @Column(name = "vitality")
     public int vitality;
+
+    @Column(name = "agility")
+    public int agility;
+
+    @Column(name = "dexterity")
+    public int dexterity;
 }
-
-//===== Equipments example start
-// {
-//     "head":"head-00001",
-//     "body":"body-00003",
-//     "legs":"legs-00001",
-//     "gloves":"",
-//     "shoes":"",
-//     "ring1":"ring-00001",
-//     "ring2":"ring-00001",
-//     "necklace":"",
-//     "back":"",
-//     "leftHand":"-",
-//     "rightHand":"bow-00002",
-//     "ammo":"arrow-00001"
-// }
-//===== Equipments example end
-
-//===== Skills example start
-// {
-//     "warrior-001":3,
-//     "priest-001":5,
-//     "priest-002":1,
-//     "knight-001":2
-// }
-//===== Skills example end

@@ -8,8 +8,8 @@ import javax.persistence.Table;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
-@Table(name = "skill")
-public class SkillEntity extends PanacheEntityBase {
+@Table(name = "buff")
+public class BuffEntity extends PanacheEntityBase {
     @Id
     @Column(name = "id")
     public String id;
@@ -17,6 +17,12 @@ public class SkillEntity extends PanacheEntityBase {
     @Column(name = "name")
     public String name;
 
-    @Column(name = "description")
-    public String description;
+    @Column(name = "trigger_interval")
+    public int triggerInterval;
+    
+    @Column(name = "effect_type")
+    public String effectType;
+    
+    @Column(name = "effect_target")
+    public String effectTarget;
 }
