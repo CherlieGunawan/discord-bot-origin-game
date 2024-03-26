@@ -73,7 +73,7 @@ public class GameService {
     }
 
     public void fetchPlayerStatus(String playerId, MessageChannel channel) {
-        messageService.sendMessage(messageService.formatQuote("Fetching status..."), channel);
+        messageService.sendMessage(messageUtil.formatQuote("Fetching status..."), channel);
         
         try {
             PlayerModel player = playerService.fetchPlayer(playerId);
@@ -87,9 +87,9 @@ public class GameService {
         }
         catch(ArcUndeclaredThrowableException ex) {
             if(GlobalFunction.isOfException(ex, "ConstraintViolationException"))
-                messageService.sendMessage(messageService.formatQuote("You're already registered!"), channel);
+                messageService.sendMessage(messageUtil.formatQuote("You're already registered!"), channel);
             else
-                messageService.sendMessage(messageService.formatCodeBlock("Sorry, it seems like there's something wrong with the server right now"), channel); //TODO: Save to db log
+                messageService.sendMessage(messageUtil.formatCodeBlock("Sorry, it seems like there's something wrong with the server right now"), channel); //TODO: Save to db log
 
             return;
         }
