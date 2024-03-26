@@ -1,12 +1,18 @@
 package com.cherlie.game.Service.Discord;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import com.cherlie.game.Constant.ConstantVariable;
 import com.cherlie.game.Global.GlobalVariable;
 import com.cherlie.game.Service.Game.GameService;
+import com.cherlie.game.Service.Game.Menu.MenuService;
 
+import discord4j.core.object.component.LayoutComponent;
 import discord4j.core.object.entity.Guild;
+import discord4j.core.object.entity.Member;
 import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.channel.MessageChannel;
 import reactor.core.publisher.Mono;
@@ -16,8 +22,14 @@ public class MessageService {
     @Inject
     GameService gameService;
 
+    @Inject
+    ButtonService buttonService;
+
+    @Inject
+    MenuService menuService;
+
     public Mono<Object> handleMessage(Message message) {
-        if(!message.getAuthor().get().getDiscriminator().equals(GlobalVariable.selfDiscriminator)) {
+        if(message.getAuthor().isPresent() && !message.getAuthor().get().getDiscriminator().equals(GlobalVariable.selfDiscriminator)) {
             processMessage(message);
             return Mono.empty();
         }
@@ -26,60 +38,42 @@ public class MessageService {
     }
 
     public void processMessage(Message message) {
+        Guild guild = message.getGuild().block();
+        MessageChannel channel = message.getChannel().block();
+        Member author = message.getAuthorAsMember().block();
+        
         String messageString = message.getContent();
 
         if(messageString.equalsIgnoreCase("init") || messageString.equalsIgnoreCase("initialize")) {
-            Guild guild = message.getGuild().block();
-            MessageChannel channel = message.getChannel().block();
-
             gameService.initialize(guild, channel);
         }
         else if(messageString.startsWith("register ")) {
-            MessageChannel channel = message.getChannel().block();
-
             String name = messageString.split("register ")[1];
-            String id = message.getAuthorAsMember().block().getId().asString();
+            String id = author.getId().asString();
             
             gameService.register(id, name, channel);
         }
         else if(messageString.equals("open status")) {
-            MessageChannel channel = message.getChannel().block();
-
             String id = message.getAuthorAsMember().block().getId().asString();
             
             gameService.fetchPlayerStatus(id, channel);
         }
-    }
-
-    public String formatCodeBlock(String message) {
-        return "```".concat(message).concat("```");
-    }
-
-    public String formatCodeLine(String message) {
-        return "`".concat(message).concat("`");
-    }
-
-    public String formatQuote(String message) {
-        return "> ".concat(message);
-    }
-
-    public String formatBold(String message) {
-        return "**".concat(message).concat("**");
-    }
-
-    public String formatItalic(String message) {
-        return "*".concat(message).concat("*");
-    }
-
-    public String formatUnderline(String message) {
-        return "__".concat(message).concat("__");
-    }
-
-    public void sendMessage(String message, Mono<MessageChannel> channel) {
-        channel.flatMap(channelVar -> channelVar.createMessage(message)).subscribe();
+        // TODO: Delete, for testing only
+        else if(messageString.equals("test button")) {
+            sendButton("It's your turn, <@" + author.getId().asString() + ">!", menuService.createButtons(ConstantVariable.BUTTON_TYPE_MAIN, author.getId().asString()), channel);
+        }
     }
 
     public void sendMessage(String message, MessageChannel channel) {
         channel.createMessage(message).subscribe();
+    }
+
+    public void sendButton(String message, List<LayoutComponent> buttons, MessageChannel channel) {
+        channel.createMessage(message).withComponents(buttons).subscribe();
+    }
+
+    // Legacy functions
+    public void sendMessage(String message, Mono<MessageChannel> channel) {
+        channel.flatMap(channelVar -> channelVar.createMessage(message)).subscribe();
     }
 }
