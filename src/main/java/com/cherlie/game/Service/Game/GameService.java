@@ -1,12 +1,16 @@
 package com.cherlie.game.Service.Game;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import com.cherlie.game.Entity.PlayerSkillEntity;
 import com.cherlie.game.Global.GlobalFunction;
 import com.cherlie.game.Global.GlobalVariable;
 import com.cherlie.game.Model.PlayerModel;
+import com.cherlie.game.Model.Custom.SkillTreeModel;
 import com.cherlie.game.Service.Discord.MessageService;
 import com.cherlie.game.Service.Entity.PlayerService;
 import com.cherlie.game.Util.MessageUtil;
@@ -81,6 +85,27 @@ public class GameService {
             String message = "Skills:\n";
             for(PlayerSkillEntity playerSkillEntity : player.playerSkills) {
                 message += playerSkillEntity.skillId + "\n";
+            }
+
+            messageService.sendMessage(message, channel);
+        }
+        catch(ArcUndeclaredThrowableException ex) {
+            if(GlobalFunction.isOfException(ex, "ConstraintViolationException"))
+                messageService.sendMessage(messageUtil.formatQuote("You're already registered!"), channel);
+            else
+                messageService.sendMessage(messageUtil.formatCodeBlock("Sorry, it seems like there's something wrong with the server right now"), channel); //TODO: Save to db log
+
+            return;
+        }
+    }
+
+    public void fetchSkillTree(MessageChannel channel) {
+        messageService.sendMessage(messageUtil.formatQuote("Fetching skill tree..."), channel);
+        
+        try {
+            String message = "Skill Tree:\n";
+            for(Map.Entry<String, SkillTreeModel> entry : GlobalVariable.skillTreeEntities.entrySet()) {
+                message += entry.getKey() + ": " + entry.getValue() + "\n";
             }
 
             messageService.sendMessage(message, channel);

@@ -2,8 +2,8 @@ package com.cherlie.game.Repository;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
 import com.cherlie.game.Entity.PlayerEntity;
 import com.cherlie.game.Entity.PlayerSkillEntity;
@@ -17,7 +17,7 @@ public class PlayerRepository {
 
     @Transactional
     public List<PlayerSkillEntity> fetchPlayerSkills(String playerId) {
-        return PlayerSkillEntity.list("player_id = ?1", playerId);
+        return PlayerSkillEntity.list("playerId = ?1", playerId);
     }
 
     @Transactional

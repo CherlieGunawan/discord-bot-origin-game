@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-03-28T14:56:57.495Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="-c1rs4RHk4WXUvifHYQj" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-25T14:30:15.569Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="3ckQ3cqtuhqa3fsCBdny" version="23.1.5" type="device">
   <diagram name="Page-1" id="zfMU9neyB5Hi67fnV1-Z">
-    <mxGraphModel dx="1050" dy="1769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="281" dy="1761" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -147,7 +147,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="b6-E7n_Yf69Xpmc01S1N-14" value="skill" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="880" y="40" width="280" height="150" as="geometry" />
+          <mxGeometry x="880" y="40" width="280" height="120" as="geometry" />
         </mxCell>
         <mxCell id="b6-E7n_Yf69Xpmc01S1N-18" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;html=1;" parent="b6-E7n_Yf69Xpmc01S1N-14" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -184,19 +184,6 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="iYusMwAVCvTY1PEWISuC-3" value="description TEXT NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;html=1;whiteSpace=wrap;" parent="iYusMwAVCvTY1PEWISuC-1" vertex="1">
-          <mxGeometry x="60" width="220" height="30" as="geometry">
-            <mxRectangle width="220" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="I-QARSdOrdYvfPDMlJXy-1" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;html=1;" vertex="1" parent="b6-E7n_Yf69Xpmc01S1N-14">
-          <mxGeometry y="120" width="280" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="I-QARSdOrdYvfPDMlJXy-2" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;html=1;whiteSpace=wrap;" vertex="1" parent="I-QARSdOrdYvfPDMlJXy-1">
-          <mxGeometry width="60" height="30" as="geometry">
-            <mxRectangle width="60" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="I-QARSdOrdYvfPDMlJXy-3" value="max_level int NOT NULL" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;html=1;whiteSpace=wrap;" vertex="1" parent="I-QARSdOrdYvfPDMlJXy-1">
           <mxGeometry x="60" width="220" height="30" as="geometry">
             <mxRectangle width="220" height="30" as="alternateBounds" />
           </mxGeometry>
@@ -1500,7 +1487,7 @@
         <mxCell id="0BmjpXsx2lbuG5qR51l_-3" value="trigger_order = skill effect trigger order, because there might be more than 1 effect per skill" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="1280" y="-80" width="320" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="PKnX_AbwwjC_SOgm1Opd-55" value="1 skill can trigger more than 1 stack" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="PKnX_AbwwjC_SOgm1Opd-55" value="1 skill can trigger more than 1 stack" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="1280" y="610" width="320" height="30" as="geometry" />
         </mxCell>
       </root>

@@ -2,8 +2,8 @@ package com.cherlie.game.Repository;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
 import com.cherlie.game.Entity.SkillBuffEntity;
 import com.cherlie.game.Entity.SkillConfigEntity;
@@ -20,21 +20,21 @@ public class SkillRepository {
 
     @Transactional
     public List<SkillPrerequisiteEntity> fetchSkillPrerequisites(String skillId) {
-        return SkillPrerequisiteEntity.list("skill_id = ?1", skillId);
+        return SkillPrerequisiteEntity.list("skillId = ?1", skillId);
     }
 
     @Transactional
     public List<SkillConfigEntity> fetchSkillConfigs(String skillId) {
-        return SkillConfigEntity.list("skill_id = ?1", skillId);
+        return SkillConfigEntity.list("skillId = ?1", skillId);
     }
 
     @Transactional
     public List<SkillBuffEntity> fetchSkillBuffs(String skillId, int triggerOrder) {
-        return SkillBuffEntity.list("skill_id = ?1 AND trigger_order = ?2", skillId, triggerOrder);
+        return SkillBuffEntity.list("skillId = ?1 AND triggerOrder = ?2", skillId, triggerOrder);
     }
 
     @Transactional
     public List<SkillDebuffEntity> fetchSkillDebuffs(String skillId, int triggerOrder) {
-        return SkillDebuffEntity.list("skill_id = ?1 AND trigger_order = ?2", skillId, triggerOrder);
+        return SkillDebuffEntity.list("skillId = ?1 AND triggerOrder = ?2", skillId, triggerOrder);
     }
 }

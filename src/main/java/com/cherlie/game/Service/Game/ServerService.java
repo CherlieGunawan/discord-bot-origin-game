@@ -1,7 +1,7 @@
 package com.cherlie.game.Service.Game;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import com.cherlie.game.Global.GlobalVariable;
 import com.cherlie.game.Service.Discord.MessageService;

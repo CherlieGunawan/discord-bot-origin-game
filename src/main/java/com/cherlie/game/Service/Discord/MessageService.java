@@ -2,8 +2,8 @@ package com.cherlie.game.Service.Discord;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import com.cherlie.game.Constant.ConstantVariable;
 import com.cherlie.game.Global.GlobalVariable;
@@ -57,6 +57,9 @@ public class MessageService {
             String id = message.getAuthorAsMember().block().getId().asString();
             
             gameService.fetchPlayerStatus(id, channel);
+        }
+        else if(messageString.equals("skill tree")) {
+            gameService.fetchSkillTree(channel);
         }
         // TODO: Delete, for testing only
         else if(messageString.equals("test button")) {

@@ -3,8 +3,8 @@ package com.cherlie.game.Service.Game.Menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import com.cherlie.game.Service.Discord.ButtonService;
 import com.cherlie.game.Util.ButtonUtil;

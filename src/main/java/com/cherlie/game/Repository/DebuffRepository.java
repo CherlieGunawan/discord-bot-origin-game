@@ -1,7 +1,7 @@
 package com.cherlie.game.Repository;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 
 import com.cherlie.game.Entity.DebuffEntity;
 

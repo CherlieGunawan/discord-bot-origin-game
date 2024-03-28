@@ -1,6 +1,6 @@
 package com.cherlie.game.Util;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import discord4j.core.object.component.Button;
 import io.vertx.core.json.JsonObject;

@@ -2,9 +2,9 @@ package com.cherlie.game.Service.Entity;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import com.cherlie.game.Model.PlayerModel;
 import com.cherlie.game.Repository.PlayerRepository;
